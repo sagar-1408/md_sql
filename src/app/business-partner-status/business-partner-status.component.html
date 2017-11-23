@@ -6,25 +6,24 @@
   <form action="">
     <!-- <input type="button" value=""> -->
     <div class="col-sm-12">
-    <a href="" class="btn btn-primary">取引先マスタへ戻る</a>
-  </div>
+      <a routerLink="/business_partner_master" class="btn btn-default">取引先マスタへ戻る</a>
+      <br>
+    </div>
+  </form>
     <br><br>
     <div class="col-sm-4">
       <label for="">取引先コード</label>
-      <input type="text" size="6;">
+      <input type="text" [(ngModel)]="customer_code" class="form-control" size="6;">
     </div>
     <div class="col-sm-4">
     <label for="">取引先名称</label>
-    <input type="text" size="20;">を含む
+    <input type="text" [(ngModel)]="suppliers" class="form-control" size="10;">
   </div>
-  <div class="col-sm-4">
-    <button class="btn btn-primary pull-right">検索</button>
-  </div>
-  </form>
 </div>
   <br>
   <table border="2" class="table table-responsive">
     <tr>
+      <th class="text-center">Select</th>
       <th class="text-center">選択</th>
       <th class="text-center">取引先コード</th>
       <th class="text-center">取引先</th>
@@ -35,18 +34,20 @@
       <th class="text-center">伝票</th>
       <th class="text-center">タグ増加率</th>
     </tr>
-    <tr>
+    <!-- {{statusdata | json}} -->
+    <tr *ngFor = "let d of statusdata | statusfilter: {'customer_code': customer_code, 'suppliers': suppliers}">
       <td class="text-center">
         <input type="radio" name="" id="">
       </td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
-      <td class="text-center"></td>
+      <td class="text-center">{{ d.id }}</td>
+      <td class="text-center">{{ d.customer_code }}</td>
+      <td class="text-center">{{ d.suppliers }}</td>
+      <td class="text-center">{{ d.business_type }}</td>
+      <td class="text-center">{{ d.order_transmission_method }}</td>
+      <td class="text-center">{{ d.WEB_EDI_setting_status }}</td>
+      <td class="text-center">{{ d.tag_kind }}</td>
+      <td class="text-center">{{ d.slip }}</td>
+      <td class="text-center">{{ d.tag_growth_rate }}</td>
     </tr>
   </table>
   <div class="pull-right">

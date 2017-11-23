@@ -1,25 +1,24 @@
 import {Injectable, Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'postsFilter'
+  name: 'filter'
 })
 @Injectable()
 export class PostsFilterPipe implements PipeTransform {
 
-  constructor(){}
+  constructor() {}
 
-  transform(posts: any[], searchText: string): any {
-    console.log (posts);
-    console.log (searchText);
+  transform(posts: any[], searchText: any): any[] {
 
-    if(!posts) return [];
-    if(!searchText) return posts;
+    if (!posts) { return []; }
+    if (!searchText) { return posts; }
       searchText = searchText.toLowerCase();
         return posts.filter( s => {
-          if(s && s.business_partner_name != undefined){
-            return s.business_partner_name.toLowerCase().includes(searchText);
-          }else
+          if (s && s.customer_code !== undefined) {
+            return String(s.customer_code).toLowerCase().includes(searchText);
+          }else {
             return false;
+          }
         });
    }
 }

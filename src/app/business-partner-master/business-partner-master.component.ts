@@ -8,24 +8,24 @@ import { BusinessService } from '../business.service';
 })
 export class BusinessPartnerMasterComponent  {
   posts : any[];
+  p: number = 1;
   // constructor(http: Http) {
   //   http.get('http://192.168.10.48:3000/vender_data?query=all')
   //     .subscribe(response =>{
   //       this.posts = response.json().data.allData;
   //     });
   //  }
-  constructor(private service: BusinessService){
-
-  }
+  constructor(private service: BusinessService){  }
   ngOnInit(){
     this.service.BusinessPartnerDetail().subscribe(res => {this.posts = res.json().data.allData})
+  }
+
+  status_page(){
+    console.log("helooooooooooooooo");
   }
 
    download_event(event){
     console.log("hello world...");
   }
 
-  filtersSettings(f){
-    console.log(f);
-  }
 }

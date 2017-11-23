@@ -1,43 +1,48 @@
 <div class="container">  
-  <div class="panel panel-primary">
-    <div class="panel-heading" style="text-align: center;"><strong>取引先マスタ</strong></div>
-  </div>  
-  <form class="form-inline" action="">
-        <br>
-        <div class="container">
-            <input type="reset" name="" id="" value="閉じる" class="pull-right btn btn-danger" style="margin-top: -18px;margin-right: 15px;">
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-sm-4">
-              <input type="button" ngModel="web_edi" value="WEB-EDI切り替えツールへ" class="btn">
-              <input type="text" [(ngModel)]="search2" class="form-control w-48" style="width: 43%;">
+    <div class="panel panel-primary">
+      <div class="panel-heading" style="text-align: center;"><strong>取引先マスタ</strong></div>
+    </div>  
+    <form class="form-inline" action="">
+          <br>
+          <div class="container">
+              <input type="reset" name="" id="" value="閉じる" class="pull-right btn btn-danger" style="margin-top: -18px;margin-right: 15px;">
           </div>
-          <div class="col-sm-4">
-              <input type="file" [(ngModel)]="file_upload" style="text-align: center;margin: auto;"> 
-              <input type="button" [(ngModel)]="upload" value="アップロード" class="btn pull-right" style="margin-top: -22px;">
+          <br>
+          <div class="row">
+            <div class="col-sm-4">
+                <a routerLink="/business_partner_status" class="btn btn-default">WEB-EDI切り替えツールへ</a>
+                <!-- <input type="button" (click) = "status_page()" value="" class="btn"> -->
+              </div>
+              <div class="col-sm-4">
+                <input type="file" name="file_upload" style="text-align: center;margin: auto;"> 
+                <input type="button" name="upload" value="アップロード" class="btn pull-right" style="margin-top: -22px;">
+              </div>
+              <div class="col-sm-4">
+                <!-- <button (click)="download_event($event)" class="btn pull-right">ダウンロード</button> -->
+                <input type="button" (click)="download_event($event)" class="btn pull-right" value="ダウンロード">
+              </div>
+            </div>
+          </form>
+          <br>
+          <div>
+            <label for="">Search Text :</label><input type="text" [(ngModel)]="search2" class="form-control w-48" style="width: 43%;">
           </div>
-          <div class="col-sm-4">
-              <!-- <button (click)="download_event($event)" class="btn pull-right">ダウンロード</button> -->
-              <input type="button" ngModel="download" (click)="download_event($event)" class="btn pull-right" value="ダウンロード">
-          </div>
-        </div>
-  </form>
-  <br><br><br>
-  <table border="2" class="table table-responsive table-hover">
-    <tr>
-      <th style="text-align:center;">取引先コード</th>
-      <th style="text-align:center;">正式名称</th>
-      <th style="text-align:center;">正式カナ</th>
-      <th style="text-align:center;">更新日時</th>
-      <th style="text-align:center;">更新者</th>
-    </tr>
-    <tr *ngFor="let business of posts | postsFilter: search2">
-      <td class="text-center">{{ business.customer_code}}</td>
-      <td class="text-center">{{ business.business_partner_name }}</td>
-      <td class="text-center">{{ business.business_partner_formal_kana}}</td>
-      <td class="text-center">{{ business.created_at | date:'yyyy-MM-dd HH:mm'}}</td>
-      <td class="text-center">{{ business.updater }}</td>
-    </tr>
-  </table>
-</div>
+          <br>
+    <table border="2" class="table table-responsive table-hover">
+      <tr>
+        <th style="text-align:center;">取引先コード</th>
+        <th style="text-align:center;">正式名称</th>
+        <th style="text-align:center;">正式カナ</th>
+        <th style="text-align:center;">更新日時</th>
+        <th style="text-align:center;">更新者</th>
+      </tr>
+      <tr *ngFor="let business of posts | filter:search2 | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td class="text-center">{{ business.customer_code}}</td>
+        <td class="text-center">{{ business.business_partner_name }}</td>
+        <td class="text-center">{{ business.business_partner_formal_kana}}</td>
+        <td class="text-center">{{ business.created_at | date:'yyyy-MM-dd HH:mm'}}</td>
+        <td class="text-center">{{ business.updater }}</td>
+      </tr>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BusinessService } from '../business.service';
 
 @Component({
   selector: 'business-partner-status',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./business-partner-status.component.css']
 })
 export class BusinessPartnerStatusComponent implements OnInit {
-
-  constructor() { }
+  statusdata;
+  constructor(private service: BusinessService) { }
 
   ngOnInit() {
+    this.statusdata = this.service.StatusData().data;
+    //console.log(this.statusdata);
   }
-
+  
 }
