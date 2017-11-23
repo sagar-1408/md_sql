@@ -21,7 +21,7 @@ export class StatusFilterPipe implements PipeTransform {
                     if ( !suppliers || (suppliers && s.suppliers.toLowerCase().includes(suppliers))) { return true;}
                 }
                 else if (suppliers && s.suppliers.toLowerCase().includes(suppliers)) {
-                    if( !customer_code && String(s.customer_code).toLowerCase().includes(customer_code)) { return true; }
+                    if( !customer_code || String(s.customer_code).toLowerCase().includes(customer_code)) { return true; }
                 }
                 return false;
             });
