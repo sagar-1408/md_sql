@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class BusinessService {
 
-  private url = "http://192.168.10.48:3000/vender_data?query=all";
+  //private url = "http://192.168.10.48:3000/vender_data?query=all";
+  private url ="http://131614ab.ngrok.io/vender_data?query=all";
 
 
   constructor(private http: Http) { }

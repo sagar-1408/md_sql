@@ -8,6 +8,7 @@ import { BusinessService } from '../business.service';
 })
 export class BusinessPartnerStatusComponent implements OnInit {
   statusdata;
+  p: number = 1;
   constructor(private service: BusinessService) { }
 
   ngOnInit() {

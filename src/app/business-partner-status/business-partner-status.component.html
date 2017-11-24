@@ -23,23 +23,21 @@
   <br>
   <table border="2" class="table table-responsive">
     <tr>
-      <th class="text-center">Select</th>
-      <th class="text-center">選択</th>
-      <th class="text-center">取引先コード</th>
-      <th class="text-center">取引先</th>
-      <th class="text-center">業態</th>
-      <th class="text-center">発注伝送方式</th>
-      <th class="text-center">WEB-EDI設定状況</th>
-      <th class="text-center">タグ種</th>
-      <th class="text-center">伝票</th>
-      <th class="text-center">タグ増加率</th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">選択</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">取引先コード</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">取引先</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">業態</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">発注伝送方式</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">WEB-EDI設定状況</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">タグ種</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">伝票</font></th>
+      <th bgcolor="#337ab7" class="text-center"><font color="#fff">タグ増加率</font></th>
     </tr>
     <!-- {{statusdata | json}} -->
-    <tr *ngFor = "let d of statusdata | statusfilter: {'customer_code': customer_code, 'suppliers': suppliers}">
+    <tr *ngFor = "let d of statusdata | statusfilter: {'customer_code': customer_code, 'suppliers': suppliers} | paginate: { itemsPerPage: 2, currentPage: p }">
       <td class="text-center">
-        <input type="radio" name="" id="">
+        <input type="radio" name="radiogroup" id="">
       </td>
-      <td class="text-center">{{ d.id }}</td>
       <td class="text-center">{{ d.customer_code }}</td>
       <td class="text-center">{{ d.suppliers }}</td>
       <td class="text-center">{{ d.business_type }}</td>
@@ -50,6 +48,7 @@
       <td class="text-center">{{ d.tag_growth_rate }}</td>
     </tr>
   </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
   <div class="pull-right">
     <button class="btn btn-default">WEB-EDIテスト/<br>本番切替マスタ</button>
     <button class="btn btn-default">部門別タグ発行<br>設定マスタ</button>

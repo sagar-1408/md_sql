@@ -28,13 +28,13 @@
             <label for="">Search Text :</label><input type="text" [(ngModel)]="search2" class="form-control w-48" style="width: 43%;">
           </div>
           <br>
-    <table border="2" class="table table-responsive table-hover">
+    <table class="table table-responsive">
       <tr>
-        <th style="text-align:center;">取引先コード</th>
-        <th style="text-align:center;">正式名称</th>
-        <th style="text-align:center;">正式カナ</th>
-        <th style="text-align:center;">更新日時</th>
-        <th style="text-align:center;">更新者</th>
+        <th bgcolor="#337ab7" style="text-align:center;"><font color="#fff">取引先コード</font></th>
+        <th bgcolor="#337ab7" style="text-align:center;"><font color="#fff">正式名称</font></th>
+        <th bgcolor="#337ab7" style="text-align:center;"><font color="#fff">正式カナ</font></th>
+        <th bgcolor="#337ab7" style="text-align:center;"><font color="#fff">更新日時</font></th>
+        <th bgcolor="#337ab7" style="text-align:center;"><font color="#fff">更新者</font></th>
       </tr>
       <tr *ngFor="let business of posts | filter:search2 | paginate: { itemsPerPage: 10, currentPage: p }">
         <td class="text-center">{{ business.customer_code}}</td>
